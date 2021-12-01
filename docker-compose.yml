@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+
+  node:
+    container_name: node
+    build:
+      context: ./node
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./node/src:/node/src
+      - ./node/tsconfig.json:/node/tsconfig.json
+    expose:
+      - "8080"
+    ports:
+      - "8080:8080"
+      - "9229:9229"
+    env_file:
+      - ./node/.env
