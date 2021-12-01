@@ -73,7 +73,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./node
-          file: ./Dockerfile.prod
+          file: ./node/Dockerfile.prod
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/node-docker-deploy:latest
 
