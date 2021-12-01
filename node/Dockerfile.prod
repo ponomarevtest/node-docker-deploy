@@ -5,7 +5,7 @@ WORKDIR /node
 COPY package*.json ./
 RUN npm install
 
-USER node
+# USER node
 
 # This will copy everything from the source path 
 # (it is more of a convenience when testing locally)
