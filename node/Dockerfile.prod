@@ -5,13 +5,14 @@ WORKDIR /node
 COPY package*.json ./
 RUN npm install
 
-# USER node
+# If you will uncomment this, you will get permission error in GitHub Actions during pusing the image to docker hub
+# USER node 
 
 # This will copy everything from the source path 
 # (it is more of a convenience when testing locally)
 COPY . .
 
-# 'npm ci' - https://stackoverflow.com/a/53325242/13156302
+# 'npm ci' is alternative to 'npm install - https://stackoverflow.com/a/53325242/13156302
 # '--only=production' allow us to install only 'dependencies', skipping 'devDependencies' from package.json
 RUN npm ci --only=production
 
