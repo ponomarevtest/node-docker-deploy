@@ -102,5 +102,5 @@ jobs:
           key: ${{ secrets.VPS_SSH_SECRET }}
           port: ${{ secrets.VPS_SSH_PORT }}
           script: |
-            cd /home/andrey/app
-            ./init.sh
+            cd /home/andrey/node-docker-deploy
+            docker-compose up --build
