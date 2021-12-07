@@ -10,6 +10,7 @@ RUN npm install
 
 # This will copy everything from the source path 
 # (it is more of a convenience when testing locally)
+# TODO: delete this line?
 COPY . .
 
 # 'npm ci' is alternative to 'npm install - https://stackoverflow.com/a/53325242/13156302
@@ -17,5 +18,6 @@ COPY . .
 RUN npm ci --only=production
 
 # Bundle app source
+# TODO: maybe replace /app with just . ?
 COPY . /app
 CMD npm run serve:prod
