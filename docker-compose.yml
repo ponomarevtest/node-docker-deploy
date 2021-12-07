@@ -9,7 +9,7 @@ services:
     restart: always
     #volumes:
       #- ./node:/node
-      #- ./node/node_modules:/node/node_modules
+      - ./node/node_modules:/node/node_modules
     expose:
       - "8080"
     ports:
