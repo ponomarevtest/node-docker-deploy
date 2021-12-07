@@ -7,7 +7,7 @@ services:
     container_name: node
     image: ponomarevandrey/node-docker-deploy
     restart: always
-    #volumes:
+    volumes:
       #- ./node:/node
       - ./node/node_modules:/node/node_modules
     expose:
