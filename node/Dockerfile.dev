@@ -5,7 +5,8 @@ WORKDIR /node
 COPY package*.json ./
 RUN npm install
 
-USER node
+# If this file would have been made for production use and if you will uncomment this line, you will get permission error in GitHub Actions during posting the image to docker hub. In dev environment we don't need this line either although it won't break anything; so the bottom line is never use it, I live it here just as a reminder
+# USER node 
 
 # This will copy everything from the source path 
 # (it is more of a convenience when testing locally)
@@ -13,4 +14,5 @@ COPY . .
 
 # 'RUN' lets you execute commands inside of your Docker image. These commands get executed once at build time and get written into your Docker image as a new layer
 # 'CMD' on the other hand lets you define a default command to run when your container starts
+
 CMD npm run serve:dev

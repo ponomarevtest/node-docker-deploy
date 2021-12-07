@@ -8,8 +8,8 @@ services:
     image: ponomarevandrey/node-docker-deploy
     restart: always
     volumes:
-      - ./node:/node
-      - ./node/node_modules:/node/node_modules
+      # - ./node:/node
+      # - ./node/node_modules:/node/node_modules
     expose:
       - "8080"
     ports:

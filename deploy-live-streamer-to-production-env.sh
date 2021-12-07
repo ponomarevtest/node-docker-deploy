@@ -4,9 +4,9 @@ echo "*** Start deployment ***"
 
 cd /home/andrey
 
-# Before this step you have to manually 'git clone' the repo, when you deploy for the first time
+# Later use only 'git pull' to update repo
 echo "1. Clone Git repo"
-git pull https://github.com/ponomarevtest/node-docker-deploy.git
+git clone https://github.com/ponomarevtest/node-docker-deploy.git
 cd node-docker-deploy
 
 echo
