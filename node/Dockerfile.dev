@@ -13,4 +13,4 @@ COPY . .
 
 # 'RUN' lets you execute commands inside of your Docker image. These commands get executed once at build time and get written into your Docker image as a new layer
 # 'CMD' on the other hand lets you define a default command to run when your container starts
-CMD npm run serve:prod
+CMD npm run serve:dev

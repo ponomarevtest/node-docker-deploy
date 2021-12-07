@@ -1,14 +1,14 @@
-# PRODUCTION
-
 version: "3.7"
 
 services:
   node:
     container_name: node
-    image: ponomarevandrey/node-docker-deploy
-    #volumes:
-      #- ./node:/node
-      #- ./node/node_modules:/node/node_modules
+    build:
+      context: ./node
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./node/src:/node/src
+      ./node/tsconfig.json:/node/tsconfig.json
     expose:
       - "8080"
     ports:
