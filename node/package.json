@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "build": "tsc",
+    "build:prod": "tsc",
     "serve:dev": "nodemon --watch ./src -e ts,json --exec TS_NODE_PROJECT=tsconfig.json node --inspect=0.0.0.0:9229 -r ts-node/register ./src/index.ts",
     "serve:prod": "TS_NODE_PROJECT=tsconfig.json node -r ts-node/register ./src/index.ts"
   },
