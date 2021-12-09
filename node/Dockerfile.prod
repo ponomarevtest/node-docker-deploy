@@ -1,16 +1,37 @@
-FROM node:alpine
+# TODO: leverage Docker caching i.e. move RUN npm install right before 
+# the line COPY ./src ./src . I don't understand how Docker caching works, 
+# so I left it as is. Caching is explained here: 
+# https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache
 
-LABEL authors="Andrey Ponomarev"
+# TODO: fix the proble, the current code will copy all including 'devDependencies' to production image
+
+#
+# State 1
+#
+
+FROM node:lts-alpine AS production_base
+ENV NODE_ENV=production
 
 WORKDIR /node
 
 COPY package*.json ./
-
+COPY tsconfig.json ./
 RUN npm install
+COPY ./src ./src
+RUN npm run build:prod
 
-# 'npm ci' is alternative to 'npm install - https://stackoverflow.com/a/53325242/13156302
-# '--only=production' allow us to install only 'dependencies', skipping 'devDependencies' from package.json
+#
+# State 2
+#
 
+FROM node:lts-alpine AS production
+
+WORKDIR /node
+
+COPY package*.json ./
 RUN npm ci --only=production
+COPY --from=production_base /node/build .
+
+USER node
 
 CMD npm run serve:prod

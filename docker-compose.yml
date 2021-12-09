@@ -5,15 +5,13 @@ version: "3.7"
 services:
   node:
     container_name: node
-    image: ponomarevandrey/node-docker-deploy
+    #image: ponomarevandrey/node-docker-deploy
+    # TODO: replace by uncommentin line above and deletin 'build' below
+    build:
+      context: ./node
+      dockerfile: Dockerfile.prod
     restart: always
-    volumes:
-      # - ./node:/node
-      # - ./node/node_modules:/node/node_modules
-    expose:
-      - "8080"
     ports:
       - "8080:8080"
-      - "9229:9229"
     env_file:
       - ./node/.env

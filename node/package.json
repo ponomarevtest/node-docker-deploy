@@ -6,8 +6,8 @@
   "scripts": {
     "test": "jest",
     "build:prod": "tsc",
-    "serve:dev": "nodemon --watch ./src -e ts,json --exec TS_NODE_PROJECT=tsconfig.json node --inspect=0.0.0.0:9229 -r ts-node/register ./src/index.ts",
-    "serve:prod": "TS_NODE_PROJECT=tsconfig.json node -r ts-node/register ./src/index.ts"
+    "serve:dev": "nodemon --watch ./src -e ts,json --exec TS_NODE_PROJECT=tsconfig.json node --inspect=0.0.0.0:9229 --require ts-node/register ./src/index.ts",
+    "serve:prod": "ts-node ./index.js"
   },
   "keywords": [],
   "author": "",
@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "jest": "^27.4.1",
     "ts-jest": "^27.0.7"
   }
 }
