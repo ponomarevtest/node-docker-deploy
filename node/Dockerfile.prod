@@ -1,37 +1,42 @@
-# TODO: leverage Docker caching i.e. move RUN npm install right before 
-# the line COPY ./src ./src . I don't understand how Docker caching works, 
-# so I left it as is. Caching is explained here: 
-# https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache
-
-# TODO: fix the proble, the current code will copy all including 'devDependencies' to production image
-
 #
-# State 1
+# State 1 (compile TS to JS)
 #
 
-FROM node:lts-alpine AS production_base
-ENV NODE_ENV=production
+FROM node:lts-alpine AS typescript
 
 WORKDIR /node
 
 COPY package*.json ./
-COPY tsconfig.json ./
+COPY tsconfig*.json ./
 RUN npm install
 COPY ./src ./src
 RUN npm run build:prod
 
+
+
 #
-# State 2
+# Stage 2 (strip all things TypeScript from our image)
 #
 
-FROM node:lts-alpine AS production
+FROM node:lts-alpine AS production_base
 
 WORKDIR /node
 
-COPY package*.json ./
-RUN npm ci --only=production
-COPY --from=production_base /node/build .
+COPY --from=typescript /node/package*.json ./
+COPY --from=typescript /node/build ./
 
-USER node
+RUN npm ci --only-production
 
-CMD npm run serve:prod
+
+
+#
+# Stage 3 (copy only the required files from stages above)
+#
+
+FROM gcr.io/distroless/nodejs:16 AS production
+
+WORKDIR /node
+
+COPY --from=production_base /node ./
+
+CMD ["index.js"]

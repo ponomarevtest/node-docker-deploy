@@ -5,11 +5,7 @@ version: "3.7"
 services:
   node:
     container_name: node
-    #image: ponomarevandrey/node-docker-deploy
-    # TODO: replace by uncommentin line above and deletin 'build' below
-    build:
-      context: ./node
-      dockerfile: Dockerfile.prod
+    image: ponomarevandrey/node-docker-deploy
     restart: always
     ports:
       - "8080:8080"
