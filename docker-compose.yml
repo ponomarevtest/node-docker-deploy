@@ -5,7 +5,7 @@ version: "3.7"
 services:
   node:
     container_name: node
-    image: ponomarevandrey/node-docker-deploy
+    image: ponomarevandrey/node-production-deploy:latest
     restart: always
     ports:
       - "8080:8080"
