@@ -10,4 +10,4 @@ app.use(exampleRouter);
 app.listen(PORT, () => {
   console.log(`${NAME}, the server is listening on port ${PORT}`);
 });
-console.log("!");
+console.log(`The app is update at ${new Date().toISOString()}`);
