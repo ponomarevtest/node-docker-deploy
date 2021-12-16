@@ -44,7 +44,7 @@ jobs:
       - name: Build and test
         run: |
           cd node
-          npm run build
+          npm run build:prod
           npm run test
 
   push_to_docker_hub:
