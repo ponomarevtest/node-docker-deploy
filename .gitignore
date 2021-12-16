@@ -1,4 +1,5 @@
 build
+docker-hub-password.txt
 
 # Logs
 logs
