@@ -6,7 +6,7 @@ router.get(
   "/hello/:name",
   (req: Request, res: Response, next: NextFunction) => {
     const { name } = req.params;
-    res.send(`Hello ${name} from express`);
+    res.send(`Hello ${name} from express !!! It is updated! Wheeee!`);
   }
 );
 
