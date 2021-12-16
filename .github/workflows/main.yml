@@ -38,10 +38,9 @@ jobs:
       - name: Install Dependencies
         run: |
           cd node
-          npm install
           npm ci
 
-      # Build and test the apps
+      # Build and test the app
       - name: Build and test
         run: |
           cd node
@@ -84,8 +83,7 @@ jobs:
         with:
           image: ${{ secrets.DOCKERHUB_USERNAME }}/node-docker-deploy:latest
           run: |
-            echo "running the docker image"
-            echo "Testing the nodejs app endpoints"
+            echo "Running the docker image"
             echo ${{ steps.docker_build.outputs.digest }}
             
   deploy:
@@ -97,10 +95,18 @@ jobs:
         uses: appleboy/ssh-action@master
         # TODO: add env vars as secrets on GitHub
         with:
+          # VPS IP
           host: ${{ secrets.VPS_SSH_HOST }}
+          # VPS username
           username: ${{ secrets.VPS_SSH_USERNAME }}
+          # SSH key (copy it from your local machine)
           key: ${{ secrets.VPS_SSH_SECRET }}
+          # SSH port
           port: ${{ secrets.VPS_SSH_PORT }}
           script: |
-            cd /home/andrey/node-docker-deploy
-            ./deploy-live-streamer-to-production-env.sh
+            echo "Pull new image"
+            docker-compose -f /home/${{ secrets.VPS_SSH_USERNAME }}/node-docker-deploy/docker-compose.yml pull
+            echo "Restart the container"
+            docker-compose -f /home/${{ secrets.VPS_SSH_USERNAME }}/node-docker-deploy/docker-compose.yml up --force-recreate --build --no-deps -d
+            echo "Delete old image"
+            docker image prune -f
