@@ -1,5 +1,6 @@
 build
 docker-hub-password.txt
+package-lock.json
 
 # Logs
 logs
