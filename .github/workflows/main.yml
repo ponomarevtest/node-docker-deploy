@@ -77,7 +77,10 @@ jobs:
           file: ./node/Dockerfile.prod
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/node-docker-deploy:latest
-# I use distroless image so this step will never succed. Test the image in someother way
+# I left this job here only for reference. As in Dockerfile I use the 
+# distroless image (i.e. it doesn't have shell), this step is impossible 
+# to execute
+#
 #      - name: Run the image in a container
 #        uses: addnab/docker-run-action@v3
 #        with:
